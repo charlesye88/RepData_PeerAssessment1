@@ -3,6 +3,7 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
+    
 ---
 
 
@@ -15,7 +16,7 @@ data <- read.csv("activity.csv",header = T)
 
 
 ## What is mean total number of steps taken per day?
-```{r}
+```{r fig.path='figure/' }
 library(data.table)
 library(ggplot2)
 data_dt <- as.data.table(data)
@@ -35,7 +36,7 @@ TotalMedian <- median(data_dt$steps,na.rm = T)
 
 
 ## What is the average daily activity pattern?
-```{r}
+```{r fig.path='figure/' }
 avg_per_interval <- data_dt[,.(avg_steps=mean(steps,na.rm = T)),by = interval]
 ggplot(data = avg_per_interval,aes(x=interval,y=avg_steps))+
   geom_line() + 
@@ -50,7 +51,7 @@ max_interval <- avg_per_interval[which.max(avg_steps),interval]
 
 
 ## Imputing missing values
-```{r, warning=FALSE}
+```{r, warning=FALSE， fig.path='figure/' }
 total_NAs <- data_dt[!complete.cases(data_dt),.N]
 
 data_complete <- data_dt[which(!complete.cases(data_dt)),steps:=mean(data_dt$steps,na.rm = T)]
@@ -71,7 +72,7 @@ TotalMedian <- median(data_complete$steps,na.rm = T)
 ## Are there differences in activity patterns between weekdays and weekends?
 
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE，fig.path='figure/' }
 library(lubridate)
 data_complete[,wdays := ifelse(wday(date)%in%c(1,7),"Weekend","weekday")]
 data_complete$wdays <- as.factor(data_complete$wdays)

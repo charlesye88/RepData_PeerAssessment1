@@ -3,6 +3,7 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
+    
 ---
 
 
@@ -25,7 +26,7 @@ total_per_day <- data_dt[,.(total = sum(steps,na.rm = T)),by =date]
 qplot(total_per_day$total,xlab = "Steps",ylab = "Count",binwidth = 500)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](figure/unnamed-chunk-2-1.png)<!-- -->
 
 ```r
 TotalMean <- mean(data_dt$steps,na.rm = T)
@@ -47,7 +48,7 @@ ggplot(data = avg_per_interval,aes(x=interval,y=avg_steps))+
   ylab("average number of steps taken")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](figure/unnamed-chunk-3-1.png)<!-- -->
 
 ```r
 max_interval <- avg_per_interval[which.max(avg_steps),interval]
@@ -67,7 +68,7 @@ total_per_day <- data_complete[,.(total = sum(steps,na.rm = T)),by =date]
 qplot(total_per_day$total,xlab = "Steps",ylab = "Count",binwidth = 500)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](figure/unnamed-chunk-4-1.png)<!-- -->
 
 ```r
 TotalMean <- mean(data_complete$steps,na.rm = T)
@@ -92,5 +93,5 @@ ggplot(data = avg_per_interval,aes(x=interval,y=avg)) + geom_line()+
   facet_grid(wdays~.)+ ylab("average steps")+xlab("interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](figure/unnamed-chunk-5-1.png)<!-- -->
 
